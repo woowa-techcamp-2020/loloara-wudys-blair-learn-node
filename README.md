@@ -1,18 +1,36 @@
-# 디버깅(Debugging)
-우아한테크캠프 Day 2 디버깅의 요소에 대해 정리해보았습니다.
+# 디버깅 관련해서 작성해보기
+- [링크](https://github.com/woowa-techcamp-2020/loloara-wudys-blair-learn-node/blob/master/debugging.md)
 
-## Breakpoint
-디버깅 모드로 실행 시 특정 지점에서 프로그램을 멈춰서 상태를 확인 할 수 있는 지점이다.
-또, 표현식이 성립하는 경우에만 중단점으로서 동작하는 조건부 Breakpoint도 존재한다.
+# 워밍업: 벽돌깨기 es6 및 클래스화
+- [과제 링크](https://github.com/woowa-techcamp-2020/woowa-honux/blob/master/week1-day2-new-js-mission.md#%EC%9B%8C%EB%B0%8D%EC%97%85-%EB%B2%BD%EB%8F%8C%EA%B9%A8%EA%B8%B0-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 
-## Watch 사용법
-디버깅 모드로 실행 시 실시간으로 변수, 혹은 조사식의 값을 모니터링 하는 방법이다. 트래킹을 원하는 변수, 객체 값을 수동으로 등록할 수 있고, 자동으로 해당 콜 스택 내의 값들을 모니터링할 수 있다.
+## [기존 구조]
+draw -> drawAll -> window.requestAnimationFrame(draw);
 
-## Call Stack의 의미
-호출 스택 창에는 메서드와 함수가 호출되는 순서가 표시된다. 앱의 실행 흐름을 검사하고 파악할 수 있는 방법이다.
+* window.requestAnimationFrame()
+브라우저에게 수행하기를 원하는 애니메이션을 알리고 다음 리페인트가 진행되기 전에 해당 애니메이션을 업데이트하는 함수를 호출하게 합니다. 이 메소드는 리페인트 이전에 실행할 콜백을 인자로 받습니다.
 
-## Stack Into // Stack Over // Stack Out
-- step over : 한줄을 실행합니다. 함수가 있어도 실행 후 다음으로 넘어갑니다.
-- step into : 한줄을 실행합니다. 'Step’은 setTimeout(함수 호출 스케줄링에 쓰이는 내장 메서드)같은 비동기 동작은 무시합니다. 반면 'Step into’는 비동기 동작을 담당하는 코드로 진입하고, 필요하다면 비동기 동작이 완료될 때까지 대기합니다.
-- step out : 현재 실행 중인 함수의 실행을 계속 이어가다가 본문 마지막 줄에서 실행을 멈춘다.
-실수로 step을 눌러 내부동장을 알고싶지 않은 중첩함수로 진입했거나 가능한 한 빨리 함수 실행을 끝내고 싶은 경우 유용합니다.
+## [새 구조]
+
+[게임 클래스]
+- 점수, 남은목숨, bricks, brickRowCount, brickColumnCount
+- 충돌여부(collisionDetection)
+- drawScore, drawLives
+- drawAll
+
+[볼 클래스]
+- x, y, dx, dy
+- drawBall(canvas)
+
+[벽돌 클래스]
+- brickWidth
+- brickHeight
+- brickPadding
+- brickOffsetTop
+- brickOffsetLeft
+
+[패들 클래스]
+- paddleHeight
+- paddleWidth
+- paddleX
+- drawPaddle()
